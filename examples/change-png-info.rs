@@ -5,7 +5,7 @@ use std::path::Path;
 pub type BoxResult<T> = Result<T, Box<dyn std::error::Error + Send + Sync>>;
 
 fn main() -> BoxResult<()> {
-    //Add image called test.png in the target folder of the library
+    // Read image called test.png in the target folder of the library
     let path = Path::new(r"./target/test.png");
     //Decode
     // The decoder is a build for reader and can be used to set various decoding options
