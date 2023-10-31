@@ -1,4 +1,6 @@
-// For reading and opening files
+/// Tests "editing"/re-encoding of an image:
+/// decoding, editing, re-encoding
+
 use std::fs::File;
 use std::io::BufWriter;
 use std::path::Path;
