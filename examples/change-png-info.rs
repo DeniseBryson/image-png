@@ -50,7 +50,7 @@ fn main() -> BoxResult<()> {
         let bytes = &buf[..info.buffer_size()];
         writer.write_image_data(&bytes)?;
         counter += 1;
-        println!("Number of loop:{}", counter);
+        println!("Written frame: {}", counter);
     }
     Ok(())
 }
