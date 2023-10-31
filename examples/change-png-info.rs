@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2023 Lukas Schattenhofer <lukas.schattenhofer@ose-germany.de>
+// SPDX-License-Identifier: MIT OR Apache-2.0
+
 /// Tests "editing"/re-encoding of an image:
 /// decoding, editing, re-encoding
 
