@@ -21,17 +21,21 @@ fn main() -> BoxResult<()> {
     let path = Path::new(r"./target/test_modified.png");
     let file = File::create(path)?;
     let ref mut w = BufWriter::new(file);
-    let mut encoder = png::Encoder::new_with_info(w, png_info.clone()); // With previous info
-                                                                        //Edit some attibute
+    // With previous info
+    let mut encoder = png::Encoder::new_with_info(w, png_info.clone());
+    // Edit some attribute
     encoder.add_text_chunk(
         "Testing tEXt".to_string(),
         "This is a tEXt chunk that will appear before the IDAT chunks.".to_string(),
     )?;
     //encoder.set_color(png::ColorType::Rgba);
     //encoder.set_depth(png::BitDepth::Eight);
-    //encoder.set_source_gamma(png::ScaledFloat::from_scaled(45455)); // 1.0 / 2.2, scaled by 100000
-    //encoder.set_source_gamma(png::ScaledFloat::new(1.0 / 2.2));     // 1.0 / 2.2, unscaled, but rounded
-    //let source_chromaticities = png::SourceChromaticities::new(     // Using unscaled instantiation here
+    //// 1.0 / 2.2, scaled by 100000
+    //encoder.set_source_gamma(png::ScaledFloat::from_scaled(45455));
+    //// 1.0 / 2.2, unscaled, but rounded
+    //encoder.set_source_gamma(png::ScaledFloat::new(1.0 / 2.2));
+    //// Using unscaled instantiation here
+    //let source_chromaticities = png::SourceChromaticities::new(
     //(0.31270, 0.32900),
     //(0.64000, 0.33000),
     //(0.30000, 0.60000),
