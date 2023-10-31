@@ -5,9 +5,9 @@ use std::path::Path;
 pub type BoxResult<T> = Result<T, Box<dyn std::error::Error + Send + Sync>>;
 
 fn main() -> BoxResult<()> {
+    // # Decode
     // Read image called test.png in the target folder of the library
     let path = Path::new(r"./target/test.png");
-    //Decode
     // The decoder is a build for reader and can be used to set various decoding options
     // via `Transformations`. The default output transformation is `Transformations::IDENTITY`.
     let decoder = png::Decoder::new(File::open(path)?);
@@ -17,7 +17,7 @@ fn main() -> BoxResult<()> {
     let png_info = reader.info();
     dbg!(png_info);
 
-    //Encode
+    // # Encode
     let path = Path::new(r"./target/test_modified.png");
     let file = File::create(path)?;
     let ref mut w = BufWriter::new(file);
@@ -42,6 +42,7 @@ fn main() -> BoxResult<()> {
     //(0.15000, 0.06000)
     //);
     //encoder.set_source_chromaticities(source_chromaticities);
+
     // Save picture with changed info
     let mut writer = encoder.write_header()?;
     let mut counter = 0u8;
