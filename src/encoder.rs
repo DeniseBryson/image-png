@@ -1681,6 +1681,25 @@ impl<W: Write> Drop for StreamWriter<'_, W> {
     }
 }
 
+/// Mod to encapsulate the converters depending on the `deflate` crate.
+///
+/// Since this only contains trait impls, there is no need to make this public, they are simply
+/// available when the mod is compiled as well.
+impl Compression {
+    fn to_options(self) -> flate2::Compression {
+        #[allow(deprecated)]
+        match self {
+            Compression::Default => flate2::Compression::default(),
+            Compression::Fast => flate2::Compression::fast(),
+            Compression::Best => flate2::Compression::best(),
+            #[allow(deprecated)]
+            Compression::Huffman => flate2::Compression::none(),
+            #[allow(deprecated)]
+            Compression::Rle => flate2::Compression::none(),
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -2379,25 +2398,6 @@ mod tests {
 
         fn flush(&mut self) -> io::Result<()> {
             self.w.flush()
-        }
-    }
-}
-
-/// Mod to encapsulate the converters depending on the `deflate` crate.
-///
-/// Since this only contains trait impls, there is no need to make this public, they are simply
-/// available when the mod is compiled as well.
-impl Compression {
-    fn to_options(self) -> flate2::Compression {
-        #[allow(deprecated)]
-        match self {
-            Compression::Default => flate2::Compression::default(),
-            Compression::Fast => flate2::Compression::fast(),
-            Compression::Best => flate2::Compression::best(),
-            #[allow(deprecated)]
-            Compression::Huffman => flate2::Compression::none(),
-            #[allow(deprecated)]
-            Compression::Rle => flate2::Compression::none(),
         }
     }
 }
